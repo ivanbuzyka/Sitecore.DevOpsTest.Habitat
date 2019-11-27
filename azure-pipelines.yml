@@ -20,6 +20,8 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+    feedsToUse: 'config'
+    nugetConfigPath: '$(Build.Repository.LocalPath)/nuget.config'
 
 - task: VSBuild@1
   inputs:
@@ -32,3 +34,9 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'sitecoredrop'
+    publishLocation: 'Container'

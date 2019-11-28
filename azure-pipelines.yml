@@ -23,12 +23,17 @@ steps:
     feedsToUse: 'config'
     nugetConfigPath: '$(Build.Repository.LocalPath)/nuget.config'
 
-- task: VSBuild@1
+- task: Npm@1
+  displayName: 'npm install'
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=true /p:publishUrl="$(build.artifactStagingDirectory)\$(Build.BuildId)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'install'
+    workingDir: build
+
+- task: Gulp@1
+  inputs:
+    gulpFile: 'gulpfile.js'
+    targets: 
+    enableCodeCoverage: false
 
 - task: ArchiveFiles@2
   inputs:

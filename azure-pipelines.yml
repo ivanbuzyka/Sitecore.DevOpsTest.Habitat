@@ -23,7 +23,7 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
     feedsToUse: 'config'
-    nugetConfigPath: '$(Build.Repository.LocalPath)/nuget.config'
+    nugetConfigPath: '$(Build.Repository.LocalPath)/examples/helix-basic-unicorn/nuget.config'
 
 - task: Npm@1
   displayName: 'npm install'
